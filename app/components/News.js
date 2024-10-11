@@ -9,7 +9,7 @@ const News = () => {
     const [headlines, setHeadlines] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
-    const API_KEY = process.env.NEXT_PUBLIC_NEWS_API_KEY; // Use environment variable
+    const API_KEY = process.env.NEWS_API_KEY; // Use environment variable
     const NEWS_API_URL = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`;
 
     useEffect(() => {
