@@ -1,4 +1,4 @@
-// components/News.js
+// app/components/News.js
 "use client";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -9,15 +9,14 @@ const News = () => {
     const [headlines, setHeadlines] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
-    const API_KEY = process.env.NEWS_API_KEY; // Use environment variable
-    const NEWS_API_URL = `https://newsapi.org/v2/top-headlines?country=us&apiKey=cd5b968c67e24d8e853db22917d78bf9`;
 
     useEffect(() => {
         const fetchHeadlines = async () => {
             try {
-                const response = await axios.get(NEWS_API_URL);
+                const response = await axios.get('/api/news'); // Call the new API route
                 setHeadlines(response.data.articles);
             } catch (err) {
+                console.error('Error fetching headlines:', err);
                 setError('Failed to fetch news headlines. Please try again later.');
             } finally {
                 setLoading(false);
@@ -25,7 +24,7 @@ const News = () => {
         };
 
         fetchHeadlines();
-    }, [NEWS_API_URL]); // Include NEWS_API_URL in dependencies
+    }, []);
 
     return (
         <div className={styles.container}>
